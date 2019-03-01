@@ -1,28 +1,42 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+// router
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+// redux
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from '@store'
+import Login from '@pages/Login/'
+import Index from '@pages/Index/'
 
+//创建store
+const store = createStore(reducer)
+const requireAuth = (Child, props) => {
+    console.log(store.getState())
+    if (store.getState().userData.name) {
+        return <Child {...props} />
+    } else {
+        return <Redirect to="/login" />
+    }
+
+    // return store.getState().userData.name
+}
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <Router activeClassName="active">
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <Route
+                            path="/index"
+                            component={props => requireAuth(Index, props)}
+                        />
+                        <Redirect from="/" to="/index" />
+                    </Switch>
+                </Router>
+            </Provider>
+        )
+    }
 }
 
-export default App;
+export default App

@@ -140,3 +140,10 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+html,
+body,
+#root,
+.ant-layout {
+    height: 100%;
+}

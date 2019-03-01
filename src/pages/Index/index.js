@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-class Login extends Component {
+class Index extends Component {
     render() {
-        return <div>首页</div>
+        return <h1>首页123123123123</h1>
     }
 }
 
-export default Login
+export default Index

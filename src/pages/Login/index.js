@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setUserData } from '@store/action'
-import { Row, Col, Form, Icon, Input, Button } from 'antd'
+import { Row, Col, Form, Icon, Input, Button, message } from 'antd'
 import './login.styl'
 
 class Login extends Component {
@@ -9,9 +9,9 @@ class Login extends Component {
         e.preventDefault()
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values, this)
                 this.props.dispatch(setUserData({ name: values.userName }))
                 this.props.history.replace('/index')
+                message.success('欢迎您~')
             }
         })
     }

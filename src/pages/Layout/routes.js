@@ -8,8 +8,8 @@ export default [
         id: 1
     },
     {
-        name: '列表',
-        path: '/list',
+        name: 'Table',
+        path: '/table',
         children: [],
         icon: '',
         isShow: true,

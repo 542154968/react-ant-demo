@@ -9,7 +9,7 @@ import Login from '@pages/Login/'
 import Layout from '@pages/Layout/'
 import { message } from 'antd'
 import Index from '@pages/Index/'
-import List from '@pages/List/'
+import Table from '@pages/Table/'
 
 //创建store
 const store = createStore(reducer)
@@ -42,8 +42,8 @@ class App extends Component {
                             component={props => requireAuth(Index, props)}
                         />
                         <Route
-                            path="/list"
-                            component={props => requireAuth(List, props)}
+                            path="/table"
+                            component={props => requireAuth(Table, props)}
                         />
                         <Redirect from="/" to="/index" />
                     </Switch>

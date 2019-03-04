@@ -36,7 +36,7 @@ class App extends Component {
                 <Router activeClassName="active">
                     <Switch>
                         <Route path="/login" component={Login} />
-                        {/* <Redirect from="/" to="/index" /> */}
+
                         <Route
                             path="/index"
                             component={props => requireAuth(Index, props)}
@@ -45,6 +45,7 @@ class App extends Component {
                             path="/list"
                             component={props => requireAuth(List, props)}
                         />
+                        <Redirect from="/" to="/index" />
                     </Switch>
                 </Router>
             </Provider>

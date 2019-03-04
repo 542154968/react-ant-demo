@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 // import { HashRouter as NavLink } from 'react-router-dom'
 // import Index from '@pages/Index/'
 // import List from '@pages/List/'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import { Layout, Menu } from 'antd'
 import DropDown from './DropDown'
+import Bread from './Breadcrumb'
+import routes from './routes'
 const { Header, Content, Sider } = Layout
 class Lay extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            defaultMenuKeys: [this.props.location.pathname]
+            defaultMenuKeys: [this.props.location.pathname],
+            activeMenuIndex: this.getActiveMenuIndex()
         }
     }
     handleClick(data, event, path) {
@@ -18,6 +21,25 @@ class Lay extends Component {
         })
         this.props.history.push(data.path)
     }
+
+    getMenu = arr => {
+        return arr.map(v => {
+            return (
+                <Menu.Item
+                    key={v.path}
+                    onClick={this.handleClick.bind(this, v)}
+                >
+                    {v.name}
+                </Menu.Item>
+            )
+        })
+    }
+
+    getActiveMenuIndex() {
+        const path = this.props.location
+        return routes.findIndex(v => v.path === path.pathname)
+    }
+
     render() {
         return (
             <Layout>
@@ -35,32 +57,11 @@ class Lay extends Component {
                             defaultOpenKeys={['sub1']}
                             style={{ height: '100%', borderRight: 0 }}
                         >
-                            {/* 这段代码真吭  Navlink 配合着会报错  */}
-
-                            <Menu.Item
-                                key="/index"
-                                onClick={this.handleClick.bind(this, {
-                                    key: '1',
-                                    path: '/index'
-                                })}
-                            >
-                                首页
-                            </Menu.Item>
-                            <Menu.Item
-                                key="/list"
-                                onClick={this.handleClick.bind(this, {
-                                    key: '2',
-                                    path: '/list'
-                                })}
-                            >
-                                列表
-                            </Menu.Item>
+                            {this.getMenu(routes)}
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item key="首页">首页</Breadcrumb.Item>
-                        </Breadcrumb>
+                        <Bread activeMenuIndex={this.state.activeMenuIndex} />
                         <Content
                             style={{
                                 background: '#fff',

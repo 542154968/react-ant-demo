@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+// import { withRouter } from 'react-router-dom'
+// 这种写法的话  不能用 HashRouter as
+// import { HashRouter as Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import Index from '@pages/Index/'
+import Table from '@pages/Table/'
+import Ani from '@pages/Animation/'
+
 import { Layout, Menu } from 'antd'
 import DropDown from './DropDown'
 import Bread from './Breadcrumb'
@@ -93,7 +100,18 @@ class Lay extends Component {
                                     mountOnEnter={true}
                                     unmountOnExit={true}
                                 >
-                                    <>{this.props.children}</>
+                                    {/* <>{this.props.children}</> */}
+                                    <Switch>
+                                        <Route
+                                            path="/index"
+                                            component={Index}
+                                        />
+                                        <Route
+                                            path="/table"
+                                            component={Table}
+                                        />
+                                        <Route path="/ani" component={Ani} />
+                                    </Switch>
                                 </CSSTransition>
                             </TransitionGroup>
                         </Content>

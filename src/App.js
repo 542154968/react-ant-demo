@@ -8,9 +8,9 @@ import reducer from '@store'
 import Login from '@pages/Login/'
 import Layout from '@pages/Layout/'
 import { message } from 'antd'
-import Index from '@pages/Index/'
-import Table from '@pages/Table/'
-import Ani from '@pages/Animation/'
+// import Index from '@pages/Index/'
+// import Table from '@pages/Table/'
+// import Ani from '@pages/Animation/'
 
 //创建store
 const store = createStore(reducer)
@@ -40,7 +40,7 @@ class App extends Component {
                             <Route path="/login" component={Login} />
 
                             <Layout path="/" component={Layout}>
-                                <Route
+                                {/* <Route
                                     exact
                                     path="/index"
                                     component={props =>
@@ -58,7 +58,7 @@ class App extends Component {
                                     exact
                                     path="/ani"
                                     component={props => requireAuth(Ani, props)}
-                                />
+                                /> */}
                             </Layout>
                         </Switch>
                     </div>

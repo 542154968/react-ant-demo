@@ -38,8 +38,9 @@ class App extends Component {
                     <div>
                         <Switch>
                             <Route path="/login" component={Login} />
-
+                            {/* 写法二 拆分路由 路由显示在别的组件里 */}
                             <Layout path="/" component={Layout}>
+                                {/* 写法1  将路由集中在一起 */}
                                 {/* <Route
                                     exact
                                     path="/index"

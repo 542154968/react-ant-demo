@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-// import { withRouter } from 'react-router-dom'
-// 这种写法的话  不能用 HashRouter as
+// 写法二的话 不能用 HashRouter as
 // import { HashRouter as Route, Switch, withRouter } from 'react-router-dom'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Index from '@pages/Index/'
@@ -100,7 +99,7 @@ class Lay extends Component {
                                     mountOnEnter={true}
                                     unmountOnExit={true}
                                 >
-                                    {/* <>{this.props.children}</> */}
+                                    {/* <>{this.props.children}</> 这是写法1的子 */}
                                     <Switch>
                                         <Route
                                             path="/index"

@@ -10,6 +10,7 @@ import Layout from '@pages/Layout/'
 import { message } from 'antd'
 import Index from '@pages/Index/'
 import Table from '@pages/Table/'
+import Ani from '@pages/Animation/'
 
 //创建store
 const store = createStore(reducer)
@@ -21,7 +22,7 @@ const requireAuth = (Child, props) => {
         return <Redirect to="/login" />
     }
     if (userData && userData.name) {
-        return <Layout {...props} children={<Child {...props} />} />
+        return <Child {...props} />
     } else {
         message.error('登录已过期，请重新登录')
         return <Redirect to="/login" />
@@ -34,19 +35,33 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <Router activeClassName="active">
-                    <Switch>
-                        <Route path="/login" component={Login} />
+                    <div>
+                        <Switch>
+                            <Route path="/login" component={Login} />
 
-                        <Route
-                            path="/index"
-                            component={props => requireAuth(Index, props)}
-                        />
-                        <Route
-                            path="/table"
-                            component={props => requireAuth(Table, props)}
-                        />
-                        <Redirect from="/" to="/index" />
-                    </Switch>
+                            <Layout path="/" component={Layout}>
+                                <Route
+                                    exact
+                                    path="/index"
+                                    component={props =>
+                                        requireAuth(Index, props)
+                                    }
+                                />
+                                <Route
+                                    exact
+                                    path="/table"
+                                    component={props =>
+                                        requireAuth(Table, props)
+                                    }
+                                />
+                                <Route
+                                    exact
+                                    path="/ani"
+                                    component={props => requireAuth(Ani, props)}
+                                />
+                            </Layout>
+                        </Switch>
+                    </div>
                 </Router>
             </Provider>
         )

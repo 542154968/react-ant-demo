@@ -14,5 +14,13 @@ export default [
         icon: '',
         isShow: true,
         id: 2
+    },
+    {
+        name: 'Ani',
+        path: '/ani',
+        children: [],
+        icon: '',
+        isShow: true,
+        id: 3
     }
 ]

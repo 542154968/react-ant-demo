@@ -57,6 +57,7 @@ class Lay extends Component {
     }
 
     render() {
+        const location = this.props.location
         return (
             <Layout>
                 <Header className="header">
@@ -88,19 +89,16 @@ class Lay extends Component {
                         >
                             <TransitionGroup>
                                 <CSSTransition
-                                    in={this.props.match !== null}
                                     // 需要加一个key属性，让react认识每个组件，并进行正确的加载。
                                     // 这里我改了官方demo的代码， 原来是设置成location.key， 这样的话每次点击同一个路由链接的时候都会渲染。
                                     key={this.props.location.pathname}
                                     // classNames 就是设置给css动画的标示，记得'classNames'带's'的。
-                                    classNames="slide-in"
+                                    classNames="slide"
                                     // 动画时间设置为800ms，和css中的需要一致。
                                     timeout={300}
-                                    mountOnEnter={true}
-                                    unmountOnExit={true}
                                 >
                                     {/* <>{this.props.children}</> 这是写法1的子 */}
-                                    <Switch>
+                                    <Switch location={location}>
                                         <Route
                                             path="/index"
                                             component={Index}

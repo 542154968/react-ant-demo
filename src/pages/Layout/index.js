@@ -18,8 +18,7 @@ class Lay extends Component {
         super(props)
         this.state = {
             defaultMenuKeys: [this.props.location.pathname],
-            activeMenuIndex: this.getActiveMenuIndex(),
-            transitionState: true
+            activeMenuIndex: this.getActiveMenuIndex()
         }
     }
 
@@ -30,19 +29,20 @@ class Lay extends Component {
         }
     }
     handleClick(data) {
+        const path = data.data.path
         this.setState({
-            defaultMenuKeys: [data.key]
+            defaultMenuKeys: [path],
+            activeMenuIndex: data.index
         })
-        this.props.history.push(data.path)
-        console.log(this.props.location.pathname, this)
+        this.props.history.push(path)
     }
 
     getMenu = arr => {
-        return arr.map(v => {
+        return arr.map((v, k) => {
             return (
                 <Menu.Item
                     key={v.path}
-                    onClick={this.handleClick.bind(this, v)}
+                    onClick={this.handleClick.bind(this, { data: v, index: k })}
                 >
                     {v.name}
                 </Menu.Item>

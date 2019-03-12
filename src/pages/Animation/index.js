@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { Button } from 'antd'
+import HTSelect from '@components/Select'
+import Child from './Child'
 import './index.styl'
 
 class Animation extends Component {
@@ -16,10 +18,15 @@ class Animation extends Component {
         }
     }
 
+    hanldeChildChange(data) {
+        console.log(this)
+    }
+
     render() {
         const { items } = this.state
         return (
             <div>
+                <HTSelect ref="htSelect" />
                 <TransitionGroup className="todo-list">
                     {items.map(({ id, text }) => (
                         <CSSTransition key={id} timeout={500} classNames="fade">
@@ -53,6 +60,7 @@ class Animation extends Component {
                 >
                     Add Item
                 </Button>
+                <Child onParentEvent={this.hanldeChildChange.bind(this)} />
             </div>
         )
     }

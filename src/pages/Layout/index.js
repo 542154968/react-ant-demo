@@ -23,8 +23,8 @@ class Lay extends Component {
     }
 
     componentWillMount() {
-        const path = this.props.path
-        if (path === '/') {
+        const pathname = this.props.location.pathname
+        if (pathname === '/') {
             this.props.history.replace('/index')
         }
     }

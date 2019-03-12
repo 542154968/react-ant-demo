@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// router
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+// router Redirect
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 // redux
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'

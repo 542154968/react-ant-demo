@@ -22,5 +22,13 @@ export default [
         icon: '',
         isShow: true,
         id: 3
+    },
+    {
+        name: 'Draggle',
+        path: '/draggle',
+        children: [],
+        icon: '',
+        isShow: true,
+        id: 4
     }
 ]

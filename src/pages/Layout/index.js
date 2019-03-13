@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import Index from '@pages/Index/'
 import Table from '@pages/Table/'
 import Ani from '@pages/Animation/'
+import Draggle from '@pages/Draggle/'
 
 import { Layout, Menu } from 'antd'
 import DropDown from './DropDown'
@@ -18,7 +19,7 @@ class Lay extends Component {
         super(props)
         this.state = {
             defaultMenuKeys: [this.props.location.pathname],
-            activeMenuIndex: this.getActiveMenuIndex()
+            activeMenuIndex: 0
         }
     }
 
@@ -26,6 +27,10 @@ class Lay extends Component {
         const pathname = this.props.location.pathname
         if (pathname === '/') {
             this.props.history.replace('/index')
+            this.setState({
+                activeMenuIndex: 0,
+                defaultMenuKeys: ['/index']
+            })
         }
     }
     handleClick(data) {
@@ -108,6 +113,10 @@ class Lay extends Component {
                                             component={Table}
                                         />
                                         <Route path="/ani" component={Ani} />
+                                        <Route
+                                            path="/draggle"
+                                            component={Draggle}
+                                        />
                                     </Switch>
                                 </CSSTransition>
                             </TransitionGroup>

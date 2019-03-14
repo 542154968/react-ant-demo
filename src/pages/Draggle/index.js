@@ -1,57 +1,97 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Radio, Checkbox } from 'antd'
 import './index.styl'
 
 import Dragging from './Dragging'
 
-const getLeft = e => {
-    var offset = e.offsetLeft
-    if (e.offsetParent != null) {
-        offset += getLeft(e.offsetParent)
-    }
-    return offset
-}
+// const getLeft = e => {
+//     var offset = e.offsetLeft
+//     if (e.offsetParent != null) {
+//         offset += getLeft(e.offsetParent)
+//     }
+//     return offset
+// }
+
+let domData = []
 
 class Contain extends Component {
     constructor(props) {
         super(props)
         this.state = {
             row: [
-                { span: 6, id: 0, bg: 'red', choice: false, text: '111' },
-                { span: 6, id: 1, bg: 'green', choice: false, text: '222' },
-                { span: 6, id: 2, bg: 'blue', choice: false, text: '333' },
-                { span: 6, id: 3, bg: 'yellow', choice: false, text: '444' }
+                {
+                    span: 6,
+                    id: 0,
+                    bg: 'red',
+                    type: 'Radio'
+                },
+                {
+                    span: 6,
+                    id: 1,
+                    bg: 'green',
+                    type: 'Checkbox'
+                }
             ],
-            movingEl: null,
-            x: 0,
-            y: 0
+            component: {
+                Radio: <Radio />,
+                Checkbox: <Checkbox />
+            },
+
+            renderDom: null
         }
     }
 
-    handleMouseDown(index, event) {
-        console.log(this)
-        const row = this.state.row.concat()
-        row.forEach((v, k) => {
-            v.choice = k === index
-        })
-        row.splice(index, 0, { span: 6, id: 0, bg: '#ccc', choice: false })
+    // 先用html5的拖拽
+    // handleMouseDown(index, event) {
+    //     const handleMove = e => {
+    //         console.log(e.clientX)
+    //     }
 
+    //     const handleUp = e => {
+    //         document.removeEventListener('mousemove', handleMove)
+    //         document.removeEventListener('mouseup', handleUp)
+
+    //         // this.refs.dragging.refs.dragging.removeChild(cloneEl)
+    //     }
+    //     document.addEventListener('mousemove', handleMove)
+    //     document.addEventListener('mouseup', handleUp)
+    // }
+
+    handleDragStart(event) {
+        event.dataTransfer.setData('Text', event.target.dataset.type)
+    }
+
+    handleDragOver(event) {
+        event.preventDefault()
+    }
+
+    handleDrop(event) {
+        event.preventDefault()
+        var data = event.dataTransfer.getData('Text')
+        this.setDomData(data)
+    }
+
+    setDomData(type) {
+        // const domArr = this.state.domData.concat()
+        // domArr.push({ type, span: 4 })
+        // this.setState({
+        //     domData: domArr
+        // })
+        // this.setRenderDom()
+        domData.push({ type, span: 4 })
+        this.setRenderDom()
+    }
+    setRenderDom() {
+        const dom = domData.map((v, k) => {
+            return (
+                <Col span={v.span} key={`${v.type}${k}`}>
+                    {this.state.component[v.type]}
+                </Col>
+            )
+        })
         this.setState({
-            row
+            renderDom: dom
         })
-
-        const handleMove = e => {
-            console.log(e.clientX)
-        }
-
-        const handleUp = e => {
-            document.removeEventListener('mousemove', handleMove)
-            document.removeEventListener('mouseup', handleUp)
-
-            // this.refs.dragging.refs.dragging.removeChild(cloneEl)
-        }
-        document.addEventListener('mousemove', handleMove)
-        document.addEventListener('mouseup', handleUp)
     }
 
     render() {
@@ -67,21 +107,26 @@ class Contain extends Component {
                         return (
                             <Col
                                 ref="col"
-                                onMouseDown={this.handleMouseDown.bind(this, k)}
+                                onDragStart={this.handleDragStart.bind(this)}
                                 className="col"
                                 span={v.span}
                                 order={k}
                                 key={v.id}
-                                style={{
-                                    background: v.bg,
-                                    position: v.choice ? 'absolute' : 'static'
-                                }}
+                                draggable
+                                data-type={v.type}
                             >
-                                {v.text}
+                                {this.state.component[v.type]}
                             </Col>
                         )
                     })}
                 </Row>
+                <div
+                    className="attach-contain"
+                    onDrop={this.handleDrop.bind(this)}
+                    onDragOver={this.handleDragOver.bind(this)}
+                >
+                    {this.state.renderDom}
+                </div>
             </div>
         )
     }

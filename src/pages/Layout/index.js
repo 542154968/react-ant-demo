@@ -6,6 +6,7 @@ import Index from '@pages/Index/'
 import Table from '@pages/Table/'
 import Ani from '@pages/Animation/'
 import Draggle from '@pages/Draggle/'
+import Grid from '@pages/Grid/'
 
 import { Layout, Menu } from 'antd'
 import DropDown from './DropDown'
@@ -117,6 +118,7 @@ class Lay extends Component {
                                             path="/draggle"
                                             component={Draggle}
                                         />
+                                        <Route path="/grid" component={Grid} />
                                     </Switch>
                                 </CSSTransition>
                             </TransitionGroup>

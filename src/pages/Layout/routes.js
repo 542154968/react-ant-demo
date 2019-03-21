@@ -30,5 +30,13 @@ export default [
         icon: '',
         isShow: true,
         id: 4
+    },
+    {
+        name: 'Grid',
+        path: '/grid',
+        children: [],
+        icon: '',
+        isShow: true,
+        id: 4
     }
 ]

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Input, Tag } from 'antd'
+import { Input, Tag, Slider } from 'antd'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const type2Component = {
     Input: <Input readOnly />,
-    Tag: <Tag>标签</Tag>
+    Tag: <Tag>标签</Tag>,
+    Slider: <Slider disabled />
 }
 
 class View extends Component {

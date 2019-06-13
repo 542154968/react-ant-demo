@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Tag } from 'antd'
+import { Input, Tag, Slider } from 'antd'
 
 class ComList extends Component {
     constructor(props) {
@@ -13,6 +13,10 @@ class ComList extends Component {
                 {
                     componentId: <Tag>标签</Tag>,
                     type: 'Tag'
+                },
+                {
+                    componentId: <Slider disabled />,
+                    type: 'Slider'
                 }
             ]
         }

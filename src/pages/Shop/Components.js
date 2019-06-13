@@ -22,6 +22,7 @@ class ComList extends Component {
         }
     }
 
+    // 开始拖拽时，先设置好要传给视图的type
     handleDragStart(data, event) {
         event.dataTransfer.setData('el-type', data.type)
     }

@@ -19,16 +19,18 @@ class View extends Component {
         }
     }
 
+    // 外部盒子的drag事件
     handleDragOver(event) {
         event.preventDefault()
     }
 
+    // 组件排序处理
     handleSortDragOver(data, event) {
         event.preventDefault()
         // clearTimeout(this.timeId)
         // this.timeId = setTimeout(() => {
         const index = data.index
-        // 同一个就不换位置了
+        // 同一个就不换位置了 动画过程中也不触发交换位置
         if (index === this.curIndex || this.isMoveing) {
             return
         }
@@ -40,6 +42,7 @@ class View extends Component {
         this.setState({
             componentList
         })
+        // 改变后当前index就是换掉顺序之后的index了 不然会一直抖动
         this.curIndex = index
         // 动画时间
         setTimeout(() => {
@@ -48,7 +51,9 @@ class View extends Component {
         // }, 20)
     }
 
+    // 当从左侧组件列表拖拽过来的时候 往视图列表添加组件
     handleDrop(event) {
+        // drop文档讲了 必须要阻止默认事件 不然会触发click啥的
         event.preventDefault()
         const componentType = event.dataTransfer.getData('el-type')
         if (componentType) {
@@ -61,6 +66,7 @@ class View extends Component {
         }
     }
 
+    // 获取添加的组件的对象
     getComponetObj(type) {
         const id = `${type}-${new Date()
             .getTime()
@@ -73,8 +79,10 @@ class View extends Component {
         }
     }
 
+    // 当视图中组件开始拖拽时， 排序用的
     handleDragStart(index, event) {
         this.curIndex = index
+        // dragStart 一定要设置dataTransfer 不然火狐没法拖拽
         event.dataTransfer.setData('el-index', index)
     }
 

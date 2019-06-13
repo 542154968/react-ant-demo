@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 // 写法二的话 不能用 HashRouter as
 // import { HashRouter as Route, Switch, withRouter } from 'react-router-dom'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import Index from '@pages/Index/'
-import Table from '@pages/Table/'
-import Ani from '@pages/Animation/'
-import Draggle from '@pages/Draggle/'
-import Grid from '@pages/Grid/'
+import Index from '@pages/Index'
+import Table from '@pages/Table'
+import Ani from '@pages/Animation'
+import Draggle from '@pages/Draggle'
+import Grid from '@pages/Grid'
+import Shop from '@pages/Shop'
 
 import { Layout, Menu } from 'antd'
 import DropDown from './DropDown'
@@ -119,6 +120,7 @@ class Lay extends Component {
                                             component={Draggle}
                                         />
                                         <Route path="/grid" component={Grid} />
+                                        <Route path="/shop" component={Shop} />
                                     </Switch>
                                 </CSSTransition>
                             </TransitionGroup>

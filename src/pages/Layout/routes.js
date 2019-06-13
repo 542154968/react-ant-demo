@@ -38,5 +38,13 @@ export default [
         icon: '',
         isShow: true,
         id: 4
+    },
+    {
+        name: '拖拽demo',
+        path: '/shop',
+        children: [],
+        icon: '',
+        isShow: true,
+        id: 5
     }
 ]

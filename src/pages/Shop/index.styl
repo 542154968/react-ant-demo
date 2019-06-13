@@ -1,0 +1,26 @@
+.shop {
+    .com-list {
+        float: left;
+        width: 300px;
+        height: 100%;
+
+        li {
+            margin-bottom: 10px;
+
+            * {
+                cursor: move;
+            }
+        }
+    }
+
+    .view {
+        margin: 0 auto;
+        width: 375px;
+        border: 1px solid #dcdcdc;
+        height: 667px;
+
+        &:-moz-drag-over {
+            border: 1px solid black;
+        }
+    }
+}

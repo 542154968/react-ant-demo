@@ -19,8 +19,7 @@ class ComList extends Component {
     }
 
     handleDragStart(data, event) {
-        console.log(event, data)
-        event.dataTransfer.setData('text/plain', data.type)
+        event.dataTransfer.setData('el-type', data.type)
     }
 
     render() {

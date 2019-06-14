@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // router Redirect
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 // redux
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
@@ -37,8 +37,10 @@ class App extends Component {
                 <Router activeClassName="active">
                     <>
                         <Switch>
+                            <Redirect from="/home" to="/" />
                             <Route path="/login" component={Login} />
                             {/* 写法二 拆分路由 路由显示在别的组件里 */}
+
                             <Layout path="/" component={Layout}>
                                 {/* 写法1  将路由集中在一起 */}
                                 {/* <Route
